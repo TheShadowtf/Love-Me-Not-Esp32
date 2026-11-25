@@ -11,7 +11,7 @@ An **ESP32-WROOM-32** project playing the **"Love Me Not"** video on a **1.30" 1
 ### How It Works
 - **Native Page-Major Framebuffer (1024 bytes)**: The `128 × 64` 1-bit framebuffer (`128 × 8` pages) matches the OLED's internal GDDRAM layout directly, so `display()` streams raw pages with zero bit transposition.
 - **Fast Transport**: Runs at **800 kHz I2C** (or **10+ MHz Hardware SPI**) with zero dynamic memory allocation (`malloc`/`new`-free), giving smooth video playback.
-- **Cold-Start Compatible**: Sends both SSD1306 (`0x8D 0x14`, `0x20 0x02`) and SH1106 (`0xAD 0x8B`) charge-pump initialization commands with a 50 ms power-rail settle delay so the display wakes up reliably from a cold power-on.
+- **Cold-Start Compatible**: Sends both SSD1306 (`0x8D 0x14`, `0x20 0x02`) and SH1106 (`0xAD 0x8B`) charge-pump initialization commands with a 50 ms power-rail settle delay so the display wakes up reliably from a cold power-on. (I specify because I didn't knew about this and I was debugging for like half an hour :)
 - **Compressed Video Streaming**: Decodes **PackBits RLE** keyframes (`OLED_FRAME_RLE`) and **XOR-delta RLE** inter-frames (`OLED_FRAME_XOR_RLE`) directly from flash (`PROGMEM`) into the 1 KB framebuffer, fitting long videos inside the ESP32's internal flash without an SD card.
 
 ### How to Use It
